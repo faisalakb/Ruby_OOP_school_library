@@ -1,3 +1,4 @@
+# Represents a person personal information.
 class Person
   attr_reader :id, :name, :age
   attr_writer :name, :age
@@ -13,9 +14,7 @@ class Person
     of_age? || @parent_permission
   end
 
-  def parent_permission=(permission)
-    @parent_permission = permission
-  end
+  attr_writer :parent_permission
 
   private
 
