@@ -1,6 +1,6 @@
 # Represents a person personal information.
 class Person
-  attr_reader :id, :name, :age
+  attr_accessor :id, :name, :age
   attr_writer :name, :age
 
   def initialize(id, age, name = 'Unknown', parent_permission = true)
