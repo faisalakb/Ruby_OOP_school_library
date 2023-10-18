@@ -1,9 +1,9 @@
 # Represents a person's personal information.
 class Person
-  attr_accessor :id, :name, :age
-  attr_writer :parent_permission
+  attr_reader :id
+  attr_accessor :name, :age
 
-  def initialize(id, age, name: 'Unknown', parent_permission: true)
+  def initialize(id, age, name = 'Unknown', parent_permission = true)
     @id = id
     @name = name
     @age = age
@@ -13,6 +13,8 @@ class Person
   def can_use_services?
     of_age? || @parent_permission
   end
+
+  attr_writer :parent_permission
 
   private
 
