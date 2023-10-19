@@ -4,6 +4,7 @@ class Person < Nameable
   attr_accessor :name, :age
 
   def initialize(age, name)
+    super()
     @id = id
     @age = age
     @name = name
