@@ -1,14 +1,13 @@
-# main.rb
 require_relative 'person'
-require_relative 'student'
-require_relative 'teacher'
+require_relative 'trime_decorative'
+require_relative 'capitalize_decorative'
 
 # Example usage
-person = Person.new(1, 20, name: 'Alice', parent_permission: true)
-puts person.can_use_services?
+person = Person.new(22, 'maximilianus')
+puts person.correct_name
 
-student = Student.new(2, 16, 'Math Class', name: 'Bob', parent_permission: true)
-puts student.play_hooky
+capitalized_person = CapitalizeDecorator.new(person)
+puts capitalized_person.correct_name
 
-teacher = Teacher.new(3, 30, 'History', name: 'Carol', parent_permission: false)
-puts teacher.can_use_services?
+capitalized_trimmed_person = TrimmerDecorator.new(capitalized_person)
+puts capitalized_trimmed_person.correct_name
