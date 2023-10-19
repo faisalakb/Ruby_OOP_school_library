@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "bundle": "^2.1.0",
+    "ruby": "^0.6.1"
+  }
+}
