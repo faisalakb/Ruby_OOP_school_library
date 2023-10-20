@@ -8,9 +8,7 @@ class Student
   end
 
   def classroom=(classroom)
-    if @classroom == classroom
-          return
-    end
+    return if @classroom == classroom
 
     @classroom&.students&.delete(self)
 
