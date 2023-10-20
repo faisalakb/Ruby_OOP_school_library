@@ -1,22 +1,9 @@
-require_relative 'nameable'
-class Person < Nameable
-  attr_reader :id
-  attr_accessor :name, :age
+class Person
+  attr_accessor :name
+  attr_reader :rentals
 
-  def initialize(age, name)
-    super()
-    @id = id
-    @age = age
+  def initialize(name)
     @name = name
-  end
-
-  def correct_name
-    @name
-  end
-
-  private
-
-  def of_age?
-    @age >= 18
+    @rentals = []
   end
 end
