@@ -1,27 +1,37 @@
-require_relative 'class_room'
-require_relative 'student'
-require_relative 'book'
-require_relative 'rental'
-require_relative 'person'
+require_relative 'app'
 
-classroom = Classroom.new('Math')
-student1 = Student.new('Alice')
-student2 = Student.new('Bob')
+app = App.new
+puts "\nWelcome to the School Library App\n"
 
-classroom.add_student(student1)
-classroom.add_student(student2)
+loop do
+  puts "\nPlease choose an option by entering the number:"
+  puts '1. List all books'
+  puts '2. List all people'
+  puts '3. Create a person'
+  puts '4. Create a book'
+  puts '5. Create a rental'
+  puts '6. List all rentals for a given person'
+  puts '7. Quit'
+  print 'Enter the option (1-7): '
+  option = gets.chomp.to_i
 
-puts "#{student1.name} is in #{student1.classroom.label} classroom."
-puts "#{student2.name} is in #{student2.classroom.label} classroom."
-
-book1 = Book.new('Ruby Programming', 'John Smith')
-book2 = Book.new('Python for Beginners', 'Jane Doe')
-
-person1 = Person.new('Emma')
-person2 = Person.new('Chris')
-
-rental1 = Rental.new(book1, person1, '2023-10-20')
-rental2 = Rental.new(book2, person2, '2023-10-21')
-
-puts "#{person1.name} has rented '#{rental1.book.title}' on #{rental1.date}."
-puts "#{person2.name} has rented '#{rental2.book.title}' on #{rental2.date}."
+  case option
+  when 1
+    app.list_books
+  when 2
+    app.list_people
+  when 3
+    app.create_person
+  when 4
+    app.create_book
+  when 5
+    app.create_rental
+  when 6
+    app.list_rentals_for_person
+  when 7
+    puts 'Goodbye! Thank you for using the School Library App.'
+    break
+  else
+    puts 'Invalid option. Please choose a valid option.'
+  end
+end
