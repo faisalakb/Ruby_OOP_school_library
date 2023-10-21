@@ -1,8 +1,9 @@
-# Represents a Teacher in a classroom.
 class Teacher < Person
-  def initialize(id, age, specialization, name: 'Unknown', parent_permission: true)
-    super(id, age, name: name, parent_permission: parent_permission)
+  def initialize(name, age, specialization, parent_permission: true)
+    super(name)
+    @age = age
     @specialization = specialization
+    @parent_permission = parent_permission
   end
 
   def can_use_services?
