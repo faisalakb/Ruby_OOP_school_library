@@ -1,10 +1,11 @@
 class Student
   attr_accessor :name
-  attr_reader :classroom
+  attr_reader :classroom, :rentals
 
   def initialize(name)
     @name = name
     @classroom = nil
+    @rentals = []
   end
 
   def classroom=(classroom)
