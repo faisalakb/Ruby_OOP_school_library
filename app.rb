@@ -60,7 +60,9 @@ class App
     person_number = select_person
     date = get_user_input('Rental date (yyyy/mm/dd): ')
 
-    if valid_selection?(book_number, @book_manager.books.length) && valid_selection?(person_number, @person_manager.people.length)
+    if valid_selection?(book_number, @book_manager.books.length) &&
+       valid_selection?(person_number, @person_manager.people.length)
+
       book = @book_manager.books[book_number]
       person = @person_manager.people[person_number]
       @rental_manager.create_rental(book, person, date)
