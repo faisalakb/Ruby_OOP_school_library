@@ -79,7 +79,9 @@ gem install
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/faisal-mumtaz-514a221a6/)
 
 
+👤 **Thierry Noumbuh**
 
+- GitHub: [@faisalakb](https://github.com/axcell-0)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
