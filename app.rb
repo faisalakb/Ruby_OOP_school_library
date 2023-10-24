@@ -3,23 +3,22 @@ require_relative 'person'
 require_relative 'rental'
 require_relative 'student'
 require_relative 'teacher'
-require_relative 'class_room'
-
+require_relative 'book_manager'
+require_relative 'person_manager'
+require_relative 'rental_manager'
 class App
   def initialize
-    @books = []
-    @people = []
-    @rentals = []
+    @book_manager = BookManager.new
+    @person_manager = PersonManager.new
+    @rental_manager = RentalManager.new
   end
 
   def list_books
-    puts 'List of Books:'
-    @books.each { |book| puts "#{book.title} by #{book.author}" }
+    @book_manager.list_books
   end
 
   def list_people
-    puts 'List of People:'
-    @people.each { |person| puts "#{person.name} (#{person.class})" }
+    @person_manager.list_people
   end
 
   def create_person
@@ -33,7 +32,7 @@ class App
 
     case choice
     when 1
-      create_student(name)
+      @person_manager.create_student(name)
     when 2
       create_teacher(name)
     else
@@ -41,18 +40,10 @@ class App
     end
   end
 
-  def create_student(name)
-    person = Student.new(name)
-    @people << person
-    puts "#{person.name} created as a Student."
-  end
-
   def create_teacher(name)
     age = get_user_input('Age: ').to_i
     specialization = get_user_input('Specialization: ')
-    person = Teacher.new(name, age, specialization)
-    @people << person
-    puts "#{person.name} created as a Teacher."
+    @person_manager.create_teacher(name, age, specialization)
   end
 
   def create_book
@@ -60,9 +51,7 @@ class App
     title = get_user_input('Title: ')
     author = get_user_input('Author: ')
 
-    book = Book.new(title, author)
-    @books << book
-    puts "'#{book.title}' by #{book.author} created."
+    @book_manager.create_book(title, author)
   end
 
   def create_rental
@@ -71,12 +60,10 @@ class App
     person_number = select_person
     date = get_user_input('Rental date (yyyy/mm/dd): ')
 
-    if valid_selection?(book_number, @books.length) && valid_selection?(person_number, @people.length)
-      book = @books[book_number]
-      person = @people[person_number]
-      rental = Rental.new(book, person, date)
-      @rentals << rental
-      puts 'Rental created successfully.'
+    if valid_selection?(book_number, @book_manager.books.length) && valid_selection?(person_number, @person_manager.people.length)
+      book = @book_manager.books[book_number]
+      person = @person_manager.people[person_number]
+      @rental_manager.create_rental(book, person, date)
     else
       puts 'Invalid book or person selection.'
     end
@@ -84,17 +71,13 @@ class App
 
   def select_book
     puts 'Select a book by number:'
-    @books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}" }
+    @book_manager.list_books
     get_user_input('Enter the book number: ').to_i
   end
 
   def select_person
     puts 'Select a person by number:'
-    @people.each_with_index do |person, index|
-      person_type = person.is_a?(Student) ? '[student]' : '[teacher]'
-      person_info = "Name: #{person.name}, ID: #{person.object_id}"
-      puts "#{index}) #{person_type} #{person_info}"
-    end
+    @person_manager.list_people
     get_user_input('Enter the person number: ').to_i
   end
 
@@ -111,7 +94,7 @@ class App
     puts "Enter person's ID to list rentals: "
     person_id = get_user_input('').to_i
 
-    person = @people.find { |p| p.object_id == person_id }
+    person = @person_manager.people.find { |p| p.object_id == person_id }
 
     if person
       puts "Rentals for #{person.name} (ID: #{person.object_id}):"
