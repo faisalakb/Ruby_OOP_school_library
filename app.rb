@@ -9,17 +9,23 @@ require_relative 'rental_manager'
 
 class App
   def initialize(book_manager, person_manager, rental_manager)
-      @book_manager = book_manager
-      @person_manager = person_manager
-      @rental_manager = rental_manager
+    @book_manager = book_manager
+    @person_manager = person_manager
+    @rental_manager = rental_manager
   end
 
   def list_books
-    @book_manager.list_books
+    puts 'List of Books:'
+    @book_manager.books.each do |book|
+      puts "#{book.title} by #{book.author}"
+    end
   end
 
   def list_people
-    @person_manager.list_people
+    puts 'List of People:'
+    @person_manager.people.each do |person|
+      puts "#{person.name} (ID: #{person.id}, Class: #{person.class})"
+    end
   end
 
   def create_person
@@ -33,18 +39,18 @@ class App
 
     case choice
     when 1
-      @person_manager.create_student(name)
+      age = get_user_input('Age: ').to_i
+      parent_permission = get_user_input('Has parent permission? (y/n): ').casecmp('y').zero?
+      @person_manager.create_student(name, age: age, parent_permission: parent_permission)
+      puts "#{name} created as a Student."
     when 2
-      create_teacher(name)
+      age = get_user_input('Age: ').to_i
+      specialization = get_user_input('Specialization: ')
+      @person_manager.create_teacher(name, age, specialization)
+      puts "#{name} created as a Teacher."
     else
       puts 'Invalid choice'
     end
-  end
-
-  def create_teacher(name)
-    age = get_user_input('Age: ').to_i
-    specialization = get_user_input('Specialization: ')
-    @person_manager.create_teacher(name, age, specialization)
   end
 
   def create_book
@@ -61,7 +67,8 @@ class App
     person_number = select_person
     date = get_user_input('Rental date (yyyy/mm/dd): ')
 
-    if valid_selection?(book_number, @book_manager.books.length) && valid_selection?(person_number, @person_manager.people.length)
+    if valid_selection?(book_number, @book_manager.books.length) &&
+       valid_selection?(person_number, @person_manager.people.length)
       book = @book_manager.books[book_number]
       person = @person_manager.people[person_number]
       @rental_manager.create_rental(book, person, date)
@@ -87,7 +94,6 @@ class App
 
     get_user_input('Enter the person number: ').to_i
   end
-
 
   def valid_selection?(number, max)
     number >= 0 && number < max

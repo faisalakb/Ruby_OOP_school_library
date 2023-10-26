@@ -5,15 +5,15 @@ class PersonManager
     @people = []
   end
 
-  def create_student(name)
-    person = Student.new(name)
+  def create_student(name, age = 0, parent_permission = true)
+    person = Student.new(name, age, parent_permission)
     @people << person
-    puts "#{person.name} created as a Student."
+    person
   end
 
   def create_teacher(name, age, specialization)
     person = Teacher.new(name, age, specialization)
     @people << person
-    puts "#{person.name} created as a Teacher."
+    person
   end
 end
