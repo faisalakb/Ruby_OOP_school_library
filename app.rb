@@ -8,10 +8,10 @@ require_relative 'person_manager'
 require_relative 'rental_manager'
 
 class App
-  def initialize
-    @book_manager = BookManager.new
-    @person_manager = PersonManager.new
-    @rental_manager = RentalManager.new
+  def initialize(book_manager, person_manager, rental_manager)
+      @book_manager = book_manager
+      @person_manager = person_manager
+      @rental_manager = rental_manager
   end
 
   def list_books
@@ -72,15 +72,22 @@ class App
 
   def select_book
     puts 'Select a book by number:'
-    @book_manager.list_books
+    @book_manager.books.each_with_index do |book, index|
+      puts "Book_Number:#{index}. #{book.title} by #{book.author}"
+    end
+
     get_user_input('Enter the book number: ').to_i
   end
 
   def select_person
     puts 'Select a person by number:'
-    @person_manager.list_people
+    @person_manager.people.each_with_index do |person, index|
+      puts "Person_Number:#{index}. #{person.name} (ID: #{person.object_id}, Class: #{person.class})"
+    end
+
     get_user_input('Enter the person number: ').to_i
   end
+
 
   def valid_selection?(number, max)
     number >= 0 && number < max

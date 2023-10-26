@@ -1,6 +1,13 @@
 require_relative 'app'
+require_relative 'book_manager'
+require_relative 'person_manager'
+require_relative 'rental_manager'
 
-app = App.new
+book_manager = BookManager.new
+person_manager = PersonManager.new
+rental_manager = RentalManager.new
+
+app = App.new(book_manager, person_manager, rental_manager)
 puts "\nWelcome to the School Library App\n"
 
 loop do

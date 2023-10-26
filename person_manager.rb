@@ -16,9 +16,4 @@ class PersonManager
     @people << person
     puts "#{person.name} created as a Teacher."
   end
-
-  def list_people
-    puts 'List of People:'
-    @people.each { |person| puts "#{person.name} (#{person.class})" }
-  end
 end

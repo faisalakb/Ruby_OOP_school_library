@@ -10,9 +10,4 @@ class BookManager
     @books << book
     puts "'#{book.title}' by #{book.author} created."
   end
-
-  def list_books
-    puts 'List of Books:'
-    @books.each { |book| puts "#{book.title} by #{book.author}" }
-  end
 end
