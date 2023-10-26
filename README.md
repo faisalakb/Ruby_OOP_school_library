@@ -79,10 +79,6 @@ gem install
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/faisal-mumtaz-514a221a6/)
 
 
-👤 **Thierry Noumbuh**
-
-- GitHub: [@axcell-0](https://github.com/axcell-0)
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🔭 Future Features <a name="future-features"></a>
