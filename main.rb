@@ -2,7 +2,7 @@ require_relative 'app'
 
 app = App.new
 puts "\nWelcome to the School Library App\n"
-
+at_exit { app.exit }
 loop do
   puts "\nPlease choose an option by entering the number:"
   puts '1. List all books'

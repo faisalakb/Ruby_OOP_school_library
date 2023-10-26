@@ -11,6 +11,9 @@ class App
     @book_manager = BookManager.new
     @person_manager = PersonManager.new
     @rental_manager = RentalManager.new
+    @book_manager.load_books_from_json
+    @person_manager.load_people_from_json
+    @rental_manager.load_rentals_from_json
   end
 
   def list_books
@@ -112,5 +115,10 @@ class App
     else
       puts 'Person not found.'
     end
+  end
+  def exit
+    @book_manager.save_books_to_json
+    @person_manager.save_people_to_json
+    @rental_manager.save_rentals_to_json
   end
 end
