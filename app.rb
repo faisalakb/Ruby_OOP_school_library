@@ -14,11 +14,19 @@ class App
   end
 
   def list_books
-    @book_manager.list_books
+    puts 'List of Books:'
+    @books.each_with_index { |book, index| puts "#{index}) #{book.title} by #{book.author}" }
   end
 
   def list_people
-    @person_manager.list_people
+    puts 'List of People:'
+    @people.each do |person|
+      if person.is_a?(Teacher)
+        puts "#{person.name} (Teacher, Age: #{person.age}, Specialization: #{person.specialization})"
+      else
+        puts "#{person.name} (Student)"
+      end
+    end
   end
 
   def create_person
