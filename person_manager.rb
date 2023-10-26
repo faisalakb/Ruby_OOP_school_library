@@ -1,4 +1,6 @@
 class PersonManager
+  attr_reader :people
+
   def initialize
     @people = []
   end
