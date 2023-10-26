@@ -41,7 +41,7 @@ class App
     when 1
       age = get_user_input('Age: ').to_i
       parent_permission = get_user_input('Has parent permission? (y/n): ').casecmp('y').zero?
-      @person_manager.create_student(name, age: age, parent_permission: parent_permission)
+      @person_manager.create_student(name, age: age, parent_permission: parent_permission, classroom: 'Some Classroom')
       puts "#{name} created as a Student."
     when 2
       age = get_user_input('Age: ').to_i
