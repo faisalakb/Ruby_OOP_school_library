@@ -5,7 +5,7 @@ class PersonManager
     @people = []
   end
 
-  def create_student(name, age = 0, parent_permission = true)
+  def create_student(name, age: 0, parent_permission: true)
     person = Student.new(name, age, parent_permission)
     @people << person
     person
