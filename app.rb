@@ -6,6 +6,7 @@ require_relative 'teacher'
 require_relative 'book_manager'
 require_relative 'person_manager'
 require_relative 'rental_manager'
+
 class App
   def initialize
     @book_manager = BookManager.new
@@ -14,19 +15,11 @@ class App
   end
 
   def list_books
-    puts 'List of Books:'
-    @books.each_with_index { |book, index| puts "#{index}) #{book.title} by #{book.author}" }
+    @book_manager.list_books
   end
 
   def list_people
-    puts 'List of People:'
-    @people.each do |person|
-      if person.is_a?(Teacher)
-        puts "#{person.name} (Teacher, Age: #{person.age}, Specialization: #{person.specialization})"
-      else
-        puts "#{person.name} (Student)"
-      end
-    end
+    @person_manager.list_people
   end
 
   def create_person
@@ -68,9 +61,7 @@ class App
     person_number = select_person
     date = get_user_input('Rental date (yyyy/mm/dd): ')
 
-    if valid_selection?(book_number, @book_manager.books.length) &&
-       valid_selection?(person_number, @person_manager.people.length)
-
+    if valid_selection?(book_number, @book_manager.books.length) && valid_selection?(person_number, @person_manager.people.length)
       book = @book_manager.books[book_number]
       person = @person_manager.people[person_number]
       @rental_manager.create_rental(book, person, date)
