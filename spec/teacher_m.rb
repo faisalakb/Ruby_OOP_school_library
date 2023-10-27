@@ -1,6 +1,6 @@
 require 'rspec'
-require_relative '../teacher' # Adjust the path to match your project structure
-require_relative '../person' # Adjust the path to match your project structure
+require_relative '../teacher' 
+require_relative '../person' 
 
 RSpec.describe Teacher do
   let(:teacher) { Teacher.new('John', 35, 'Math') }

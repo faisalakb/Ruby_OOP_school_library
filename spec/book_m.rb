@@ -1,8 +1,6 @@
-# Assuming you have RSpec set up and configured
-
 require 'rspec'
-require_relative '../book' # Require the Book class file (adjust the path accordingly)
-require_relative '../rental' # Require the Rental class file (adjust the path accordingly)
+require_relative '../book' 
+require_relative '../rental' 
 
 RSpec.describe Book do
   let(:book) { Book.new('Sample Book', 'Sample Author') }

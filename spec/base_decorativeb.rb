@@ -1,7 +1,5 @@
 require 'rspec'
-require_relative '../base_decorative.rb' # Adjust the path to match your project structure
-
-# Assuming you have a `Nameable` class or module that the `Decorator` class is based on.
+require_relative '../base_decorative.rb' 
 
 RSpec.describe Decorator do
   let(:nameable) { double('Nameable', correct_name: 'John Doe') }
