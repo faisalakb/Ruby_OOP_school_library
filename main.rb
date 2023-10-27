@@ -8,6 +8,7 @@ person_manager = PersonManager.new
 rental_manager = RentalManager.new
 
 app = App.new(book_manager, person_manager, rental_manager)
+app.load_data_from_json
 puts "\nWelcome to the School Library App\n"
 
 loop do
@@ -36,7 +37,7 @@ loop do
   when 6
     app.list_rentals_for_person
   when 7
-    puts 'Goodbye! Thank you for using the School Library App.'
+    app.exit
     break
   else
     puts 'Invalid option. Please choose a valid option.'

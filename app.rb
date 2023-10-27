@@ -14,16 +14,22 @@ class App
     @rental_manager = rental_manager
   end
 
+
+  def exit
+    save_data_to_json
+    puts 'Goodbye! Thank you for using the School Library App.'
+  end
+
   def list_books
     puts 'List of Books:'
-    @book_manager.books.each do |book|
+    @book_manager.list_books.each do |book|
       puts "#{book.title} by #{book.author}"
     end
   end
 
   def list_people
     puts 'List of People:'
-    @person_manager.people.each do |person|
+    @person_manager.list_people.each do |person|
       puts "#{person.name} (ID: #{person.id}, Class: #{person.class})"
     end
   end
@@ -57,8 +63,8 @@ class App
     puts 'Enter book details:'
     title = get_user_input('Title: ')
     author = get_user_input('Author: ')
-
     @book_manager.create_book(title, author)
+    puts 'Book created.'
   end
 
   def create_rental
@@ -67,11 +73,12 @@ class App
     person_number = select_person
     date = get_user_input('Rental date (yyyy/mm/dd): ')
 
-    if valid_selection?(book_number, @book_manager.books.length) &&
-       valid_selection?(person_number, @person_manager.people.length)
-      book = @book_manager.books[book_number]
-      person = @person_manager.people[person_number]
+    if valid_selection?(book_number, @book_manager.list_books.length) &&
+       valid_selection?(person_number, @person_manager.list_people.length)
+      book = @book_manager.list_books[book_number]
+      person = @person_manager.list_people[person_number]
       @rental_manager.create_rental(book, person, date)
+      puts 'Rental created.'
     else
       puts 'Invalid book or person selection.'
     end
@@ -79,8 +86,8 @@ class App
 
   def select_book
     puts 'Select a book by number:'
-    @book_manager.books.each_with_index do |book, index|
-      puts "Book_Number:#{index}. #{book.title} by #{book.author}"
+    @book_manager.list_books.each_with_index do |book, index|
+      puts "Book_Number: #{index}. #{book.title} by #{book.author}"
     end
 
     get_user_input('Enter the book number: ').to_i
@@ -88,8 +95,8 @@ class App
 
   def select_person
     puts 'Select a person by number:'
-    @person_manager.people.each_with_index do |person, index|
-      puts "Person_Number:#{index}. #{person.name} (ID: #{person.object_id}, Class: #{person.class})"
+    @person_manager.list_people.each_with_index do |person, index|
+      puts "Person_Number: #{index}. #{person.name} (ID: #{person.id}, Class: #{person.class})"
     end
 
     get_user_input('Enter the person number: ').to_i
@@ -108,13 +115,28 @@ class App
     puts "Enter person's ID to list rentals: "
     person_id = get_user_input('').to_i
 
-    person = @person_manager.people.find { |p| p.object_id == person_id }
+    person = @person_manager.list_people.find { |p| p.id == person_id }
 
     if person
-      puts "Rentals for #{person.name} (ID: #{person.object_id}):"
-      person.rentals.each { |rental| puts "#{rental.book.title} (Rented on #{rental.date})" }
+      puts "Rentals for #{person.name} (ID: #{person.id}):"
+      @rental_manager.list_rentals_for_person(person).each do |rental|
+        puts "#{rental.book.title} (Rented on #{rental.date})"
+      end
     else
       puts 'Person not found.'
     end
+  end
+
+  def save_data_to_json
+    @book_manager.save_books_to_json('books.json')
+    @person_manager.save_people_to_json('people.json')
+    @rental_manager.save_rentals_to_json('rentals.json')
+    puts 'Data saved to JSON files.'
+  end
+  def load_data_from_json
+    @book_manager.load_books_from_json('books.json')
+    @person_manager.load_people_from_json('people.json')
+    @rental_manager.load_rentals_from_json('rentals.json')
+    puts 'Data loaded from JSON files.'
   end
 end
