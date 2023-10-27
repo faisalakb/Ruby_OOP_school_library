@@ -8,7 +8,8 @@ class PersonManager
   end
 
   def create_student(name, age: 0, parent_permission: true, classroom: 'Unknown')
-    person = Student.new(name, age: age, parent_permission: parent_permission, classroom: classroom)
+    person = Student.new(name, age, parent_permission: parent_permission, classroom: classroom)
+
     @people << person
     person
   end
