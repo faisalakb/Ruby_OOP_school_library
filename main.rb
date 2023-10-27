@@ -2,6 +2,11 @@ require_relative 'app'
 require_relative 'book_manager'
 require_relative 'person_manager'
 require_relative 'rental_manager'
+require_relative 'book'
+require_relative 'person'
+require_relative 'rental'
+require_relative 'student'
+require_relative 'teacher'
 
 book_manager = BookManager.new
 person_manager = PersonManager.new
@@ -9,6 +14,9 @@ rental_manager = RentalManager.new
 
 app = App.new(book_manager, person_manager, rental_manager)
 puts "\nWelcome to the School Library App\n"
+
+# Load data from JSON files at startup
+app.load_data
 
 loop do
   puts "\nPlease choose an option by entering the number:"
@@ -37,6 +45,8 @@ loop do
     app.list_rentals_for_person
   when 7
     puts 'Goodbye! Thank you for using the School Library App.'
+    # Save data to JSON files before exiting
+    app.save_data
     break
   else
     puts 'Invalid option. Please choose a valid option.'

@@ -1,3 +1,4 @@
+require 'json'
 require_relative 'book'
 require_relative 'person'
 require_relative 'rental'
@@ -12,6 +13,7 @@ class App
     @book_manager = book_manager
     @person_manager = person_manager
     @rental_manager = rental_manager
+    load_data
   end
 
   def list_books
@@ -75,6 +77,7 @@ class App
     else
       puts 'Invalid book or person selection.'
     end
+    save_data
   end
 
   def select_book
@@ -116,5 +119,17 @@ class App
     else
       puts 'Person not found.'
     end
+  end
+
+  def save_data
+    @book_manager.save_books_to_json('books.json')
+    @person_manager.save_people_to_json('people.json')
+    @rental_manager.save_rentals_to_json('rentals.json')
+  end
+
+  def load_data
+    @book_manager.load_books_from_json('books.json')
+    @person_manager.load_people_from_json('people.json')
+    @rental_manager.load_rentals_from_json('rentals.json')
   end
 end

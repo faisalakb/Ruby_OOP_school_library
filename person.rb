@@ -1,7 +1,7 @@
 class Person
   attr_accessor :id, :name, :age, :rentals
 
-  def initialize(name, age = 0, parent_permission: true)
+  def initialize(name, age, parent_permission: true)
     @id = object_id
     @name = name
     @age = age
