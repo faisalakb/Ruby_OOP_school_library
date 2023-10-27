@@ -1,10 +1,10 @@
 require 'rspec'
-require_relative '../student' 
-require_relative '../person' 
-require_relative '../class_room' 
+require_relative '../student'
+require_relative '../person'
+require_relative '../class_room'
 
 RSpec.describe Student do
-  let(:classroom) { Classroom.new('Math Class') } 
+  let(:classroom) { Classroom.new('Math Class') }
   let(:student) { Student.new('Alice', 16, classroom: classroom) }
 
   describe '#initialize' do

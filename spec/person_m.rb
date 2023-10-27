@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative '../person' 
+require_relative '../person'
 require_relative '../rental'
 
 RSpec.describe Person do
