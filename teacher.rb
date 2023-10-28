@@ -1,11 +1,24 @@
-# Represents a Teacher in a classroom.
+require_relative 'person'
 class Teacher < Person
-  def initialize(id, age, specialization, name: 'Unknown', parent_permission: true)
-    super(id, age, name: name, parent_permission: parent_permission)
+  attr_accessor :rentals, :specialization
+
+  def initialize(name, age, specialization, parent_permission: true)
+    super(name, age, parent_permission: parent_permission)
     @specialization = specialization
+    @rentals = []
   end
 
   def can_use_services?
     true
+  end
+
+  def to_h
+    {
+      'class' => 'Teacher',
+      'name' => @name,
+      'age' => @age,
+      'parent_permission' => @parent_permission,
+      'specialization' => @specialization
+    }
   end
 end
