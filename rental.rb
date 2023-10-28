@@ -2,23 +2,20 @@ require_relative 'book'
 require_relative 'person'
 
 class Rental
-  attr_accessor :date
-  attr_reader :book, :person
+  attr_accessor :date, :book, :person
 
-  def initialize(book, person, date)
+  def initialize(date, book, person)
+    @date = date
     @book = book
     @person = person
-    @date = date
-
-    book.rentals << self if book.respond_to?(:rentals)
-    person.rentals << self if person.respond_to?(:rentals)
   end
 
   def to_h
     {
       'book' => {
-        'title' => @book.title,
-        'author' => @book.author
+      'date' => @date,
+      'book' => @book.to_h,  # Correctly reference the book's to_h method
+      'person' => @person.to_h
       },
       'person_id' => @person.object_id,
       'date' => @date

@@ -8,14 +8,16 @@ class Book
   end
 
   def add_rental(person, date)
-    Rental.new(date, self, person)
+    rental = Rental.new(date, self, person)
+    @rentals << rental
+    rental
   end
 
   def to_h
     {
-      'title' => @title,
-      'author' => @author,
-      'rentals' => @rentals.map(&:to_h)
+      'title' => title,
+      'author' => author,
+      'rentals' => rentals.map { |rental| rental.to_h }
     }
   end
 end
