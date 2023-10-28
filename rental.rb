@@ -13,9 +13,9 @@ class Rental
   def to_h
     {
       'book' => {
-      'date' => @date,
-      'book' => @book.to_h,  # Correctly reference the book's to_h method
-      'person' => @person.to_h
+        'date' => @date,
+        'book' => @book.to_h, # Correctly reference the book's to_h method
+        'person' => @person.to_h
       },
       'person_id' => @person.object_id,
       'date' => @date

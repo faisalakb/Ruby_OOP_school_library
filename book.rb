@@ -17,7 +17,7 @@ class Book
     {
       'title' => title,
       'author' => author,
-      'rentals' => rentals.map { |rental| rental.to_h }
+      'rentals' => rentals.map(&:to_h)
     }
   end
 end
